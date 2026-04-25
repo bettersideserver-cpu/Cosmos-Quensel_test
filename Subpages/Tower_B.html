@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cosmos Quesnel</title>
+    <link rel="stylesheet" href="./../wbn05d6fbh.css">
+    <link rel="stylesheet" href="./../JS/CSS/rb16lq8yi1.css">
+    <link rel="stylesheet" href="./../JS/Notification/bz0mp28u74.css">
+    <style>
+        @media (max-width: 600px) {
+            .Front {
+                position: fixed;
+                top: 55%;
+                left: 50%;
+            }
+        }
+
+
+        .call-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+
+            /* reduced gap */
+            padding: 11px 1px;
+            /* smaller height */
+
+            border-radius: 8px;
+            /* slightly tighter */
+            font-weight: 600;
+            font-size: 14px;
+            /* smaller text */
+            text-decoration: none;
+
+            background: #C9A87C;
+            color: #111;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+            transition: all 0.2s ease;
+        }
+
+        /* hover */
+        .call-btn:hover {
+            background: #0078be;
+            color: #fff;
+        }
+
+        /* ════ JUMPBAR (pill style) ════ */
+        #jumpBar {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11000;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-family: 'DM Sans', 'Poppins', -apple-system, sans-serif;
+        }
+
+        #jumpBar a {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            height: 36px;
+            padding: 0 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #555;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        #jumpBar a svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            flex-shrink: 0;
+        }
+
+        #jumpBar a:hover {
+            color: #111;
+            background: #f0f0f0;
+        }
+
+        #jumpBar a.active {
+            color: #fff;
+            background: #111;
+            font-weight: 600;
+        }
+
+        #jumpBar .jb-divider {
+            width: 1px;
+            height: 18px;
+            background: #e0e0e0;
+            margin: 0 2px;
+        }
+
+        /* ════ ENQUIRY TRIGGER BUTTON ════ */
+        .enquiry-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10001;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 24px 13px;
+            background: #111;
+            color: #fff;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 12px 0 0 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+            transition: opacity 0.3s ease, background 0.2s ease;
+        }
+
+        .enquiry-btn.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .enquiry-btn:hover {
+            background: #2a2a2a;
+        }
+
+        @media (max-width: 600px) {
+            .enquiry-btn {
+                font-size: 9px;
+                padding: 18px 10px;
+            }
+        }
+
+        /* ════ FAB CLUSTER ════ */
+        .fab-cluster {
+            position: fixed;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fab-item {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            transition: width 0.25s cubic-bezier(.4, 0, .2, 1), border-radius 0.25s ease;
+            white-space: nowrap;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .fab-item:hover {
+            width: 140px;
+            border-radius: 22px;
+        }
+
+        .fab-whatsapp {
+            background: #25d366;
+        }
+
+        .fab-whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        .fab-email {
+            background: #1a73e8;
+        }
+
+        .fab-email:hover {
+            background: #1558c0;
+        }
+
+        .fab-location {
+            background: #ea4335;
+        }
+
+        .fab-location:hover {
+            background: #d33426;
+        }
+
+        .fab-icon {
+            min-width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .fab-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .fab-label {
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
+            padding-right: 14px;
+            color: #fff;
+        }
+
+        .fab-item:hover .fab-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 600px) {
+            .fab-cluster {
+                left: 10px;
+                top: auto;
+                bottom: 90px;
+                transform: none;
+                gap: 8px;
+            }
+
+            .fab-item:hover {
+                width: 44px;
+                border-radius: 50%;
+            }
+
+            .fab-label {
+                display: none;
+            }
+        }
+
+        /* ════ ENQUIRY PANEL OVERRIDES ════ */
+        .enquiry .submit {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 13px;
+            font-weight: 700;
+            font-size: 13px;
+            background: #fff;
+            color: #111;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: background 0.15s;
+            font-family: 'Poppins', -apple-system, sans-serif;
+        }
+
+        .enquiry .submit:hover {
+            background: #e8e8e8;
+        }
+
+
+        /* ════ ENQUIRY PANEL — FULL INLINE ════ */
+        .enquiry .overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: flex-end;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            z-index: 99999;
+            pointer-events: none;
+            transition: background 0.35s ease, backdrop-filter 0.35s ease;
+        }
+
+        .enquiry .overlay.is-open {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            pointer-events: auto;
+        }
+
+        .enquiry .modal {
+            width: min(400px, 100vw);
+            height: 100%;
+            background: #18181b;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -12px 0 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+            font-family: 'Poppins', -apple-system, sans-serif;
+        }
+
+        .enquiry .overlay.is-open .modal {
+            transform: translateX(0);
+        }
+
+        .enquiry .modal-header {
+            padding: 22px 20px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            flex-shrink: 0;
+        }
+
+        .enquiry .modal-header::before {
+            content: '';
+            flex-shrink: 0;
+            width: 3px;
+            height: 20px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .enquiry .modal-header .title {
+            flex: 1;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.2px;
+        }
+
+        .enquiry .close {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .enquiry .close:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .enquiry .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .enquiry .form {
+            display: grid;
+            gap: 12px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .enquiry .input,
+        .enquiry .select,
+        .enquiry .phone {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 13px;
+            color: #fff;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            transition: border-color 0.2s, background 0.2s;
+            outline: none;
+        }
+
+        .enquiry .input:focus,
+        .enquiry .select:focus {
+            border-color: rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .enquiry .input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .enquiry .select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18'><path d='M7 10l5 5 5-5' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        .enquiry .phone {
+            display: flex;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .enquiry .phone select {
+            appearance: none;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 12px;
+            min-width: 72px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            outline: none;
+        }
+
+        .enquiry .phone input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 12px;
+            font-size: 13px;
+            color: #fff;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            outline: none;
+        }
+
+        .enquiry .phone input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 560px) {
+            .enquiry .modal {
+                width: 100vw;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        sessionStorage.setItem('lastTower', 'A');
+    </script>
+
+
+    <div id="ui-hint" class="ui-hint" aria-live="polite" role="status">
+        <div class="ui-hint__row ui-hint__desktop">
+            <svg width="18" height="24" viewBox="0 0 18 24" aria-hidden="true">
+                <path d="M9 1c3.9 0 7 3.1 7 7v8c0 3.9-3.1 7-7 7s-7-3.1-7-7V8c0-3.9 3.1-7 7-7z" fill="white"
+                    opacity=".18" />
+                <rect x="8" y="4" width="2" height="5" rx="1" fill="white" />
+                <rect x="5" y="10" width="8" height="9" rx="4" fill="white" opacity=".4" />
+            </svg>
+            <span>Click on Floor To See Aparments</span>
+        </div>
+        <div class="ui-hint__row ui-hint__touch">
+            <svg width="18" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M12 2a4 4 0 014 4v4h1.2a2.8 2.8 0 012.8 2.8V16c0 3.3-2.7 6-6 6H9.5A5.5 5.5 0 014 16.5V11a3 3 0 016 0v3h1V6a4 4 0 011-2.7z"
+                    fill="white" opacity=".28" />
+                <rect x="11" y="5" width="2" height="9" rx="1" fill="white" />
+            </svg>
+            <span>Click on Tower's To Select Floor</span>
+        </div>
+    </div>
+
+    <button class="close-btn" id="closeCard">←</button>
+
+
+
+    <div id="floorTip" class="floortip" aria-hidden="true"></div>
+
+    <div class="Front">
+        <div class="image-wrapper">
+            <img id="mainImage" src="./../images/Thumbnail/Tower_B.webp" data-full="./../images/Tower_B.jpg"
+                alt="Tower_2" fetchpriority="high" decoding="async" width="3840" height="5830" class="blur-up" />
+            <div class="Cutout">
+                <!-- <svg viewBox="0 0 3840 5830" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Floor_06" data-link="Lobby_Top.html" data-name="Floor 06"
+                        d="M3184.47 2279.44v5.34l-14.44 6.44v9.56l-14 6.66v127.73l-5.84.33-.16 8.5 5.33 2.33v37l-550.89-2.77 8-5.89-468.5-1.56-2.89 6.67-598.11-2.2-4.66-5.58-237.28-.5 8.33 5.5-300.44-.11-11.84-6.06-238.94-.94 20.17 7-281.17-1.56-352.47-.77-.07-106.56h-2.63v-2.63l181.86.8v-66.89l-232-91.78v-19.33h167.34V2120l-18.67-10-.17-12-20.16-10.67V2081h39v-14.67l518.64 2.11 42.55 32.89 182.22 1.23.78-9.89-4.22-4.11-.67-6.23 9.78.23.11-13.34 1897.06 7.5-1.17 15.34h38.33l-.83 6.83-16.33 13.67-.5 9-20.67 15 1.67 129 249.89.77.88 12.23z"
+                        class="st0" />
+                    <path id="Floor_05" data-link="Lobby_Top.html" data-name="Floor 05"
+                        d="m3554.69 2444.97-15.75 4.59-.5 14.41-15.16 4.59v275.33l-361.89-2.78 17.11-3.89-265.44.45-14 2.66-295.56-1.58 11-2.86-470 .33-606.33 2.53h-529.23l-12.52-1.42H144.17l.61-105.72h-2.59v-3.25l181 .92.48-109.11-179-45.61 352.47.77 281.17 1.56-20.17-7 238.94.94 11.84 6.06 300.44.11-8.33-5.5 237.28.5 4.66 5.58 598.11 2.2 2.89-6.67 468.5 1.56-8 5.89 550.89 2.77v-37l-5.33-2.33.16-8.5 5.84-.33 398.16 1.3z"
+                        class="st0" />
+                    <path id="Floor_04" data-link="Lobby_Top.html" data-name="Floor 04"
+                        d="m3523.5 2999.92-3200.44-.47-178.5-.03.58-106.48h-2.95v-2.88l180.45.88v-135.22l-178.47-18.39h852.25l12.52 1.42h529.23l606.33-2.53 470-.33-11 2.86 295.56 1.58 14-2.66 265.44-.45-17.11 3.89 361.89 2.78z"
+                        class="st0" />
+                    <path id="Floor_03" data-link="Lobby_Top.html" data-name="Floor 03"
+                        d="m3523.5 2999.92-.79 267.21-345-6.12-264.67.45-13.78-3.56-284.94 4.5-470.33 1.84-5.17-6.34-595.56 1.89-6.33 5.34-235 .66-292.67-4.33-12 5.67h-239v-4.34l-435.33-.08-177.58-.03.41-106.08h-3.37v-2.46l180.17-24.83.5-129.86z"
+                        class="st0" />
+                    <path id="Floor_02" data-link="Lobby_Top.html" data-name="Floor 02"
+                        d="m3523.86 3498.22-22.33-.33v14.33l-323.67.89-.78 10.56-255 1.11-18.5-12.17-289.11 1.56-.55 11.44-475.84 1.95-6.66-11.17-585.78 1.72-7.67 11-232.11.78v-10.67l-293.55.56-15.56 11.33-232.89.56s-.17-10.5 0-11-260.28.39-260.28.39l-5.66 3.44-353.45.56.61-105.99-3.08.37.39-2.65 180.54-52.89v-101.19l435.33.08v4.34h239l12-5.67 292.67 4.33 235-.66 6.33-5.34 595.56-1.89 5.17 6.34 470.33-1.84 284.94-4.5 13.78 3.56 264.67-.45 345 6.12z"
+                        class="st0" />
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 3840 2160">
+                    <defs>
+                        <style>
+                            .st0 {
+                                fill: #fff
+                            }
+                        </style>
+                    </defs>
+                    <path id="Floor_x5F_05" data-link="Lobby_Top.html" data-name="Floor 05"
+                        d="m2660.88 710.96-10.56 1.78-.78 9.11-10.89 1.66 1.23 130.06.55 57.72 1.08 11.67-122.69-10.61 14.33-3.78-207.27-17.33-14 1.77-311-23.22 14-4.55-136.67-10.67-14 2.67-190.45-15.11 9.89-3.78-162.66-13.56-9.45 3.34-508.16-40.67-58.84 38.17 94.67 5.5-87.56 78.55-90.11-4.55-36.37 19.65v-10.34l3.16-1.16.5-49.84 37.34-26.83 56.5 3.83-.56-46.77-40.54-3.3-55.01-4.48V777l40.22-36.89 56.44 5.11 1.34-44.66 42.22-38 1.33-27.78-55.55-7.34v-13.11l65.55-72.44 34.67 4.22 79.11-76.89h5.11l13.33-10.44 403.99 61.35.89 11 4.33-.67 3.67 5.78-3.45 4.44.78 6.22 115.78 16.17 36.11-17.33 964.78 150.55.44 7.89 22.67 2.78z"
+                        class="st0" />
+                    <path id="Floor_x5F_04" data-link="Lobby_Top.html" data-name="Floor 04"
+                        d="m2873.76 930.58-7.51 1.36 1.86 112.2.43 26.21-128.3-.09 15.77-1.11-98.5-3.55-14.22 1.61-122.83-3.83 16.11-2.45-209.61-5.8-15.17 2.16-311.22-11.97 13.67-2.28-137.17-4.3-11.25 1.33-194.19-4.89 12-3-165.84-6.44-8.33 2.33-508-17.33-60.17 15.83 94.5 3.33-118.12 41.21-96-3.33v-9.84l5.33-1.66-.33-49.84L864 992.28l55.83 1.66.16-60.42.01-3.08-94.83-5.66 36.37-19.65 90.11 4.55 87.56-78.55-94.67-5.5 58.84-38.17 508.16 40.67 9.45-3.34 162.66 13.56-9.89 3.78 190.45 15.11 14-2.67 136.67 10.67-14 4.55 311 23.22 14-1.77 207.27 17.33-14.33 3.78 122.69 10.61-1.08-11.67 40.33 4.22.23-3.22 59.11-7 140.44 11.33.28 5.12-7.18.63z"
+                        class="st0" />
+                    <path id="Floor_x5F_03" data-link="Lobby_Top.html" data-name="Floor 03"
+                        d="M2870.89 1212.7v.01l-112.79-.25-98.75.92-13.17.41-317.36 4.06-16.56.11-296.88 4.28-139.34 2.22-12.89.22-344.41 4.42-11.11 1.11-510.06 5.55-58-5.77-24.4-13.38H858l-38.33-3.67v-9.83h3l1.5-33.73.83-18.77 91.67-2 1-77.5 118.12-41.21-94.5-3.33 60.17-15.83 508 17.33 8.33-2.33 165.84 6.44-12 3 194.19 4.89 11.25-1.33 137.17 4.3-13.67 2.28 311.22 11.97 15.17-2.16 209.61 5.8-16.11 2.45 122.83 3.83 14.22-1.61 98.5 3.55-15.77 1.11 128.3.09 1.55 93.44z"
+                        class="st0" />
+                    <path id="Floor_x5F_02" data-link="Lobby_Top.html" data-name="Floor 02"
+                        d="m2873.13 1347.93-111.89 8.33-17.11.89-82.89 5-12.45-.66-109.33 8.22-210.33 13.33s-14.42-1-14.75-1.08c-.34-.08-299.34 20.75-299.34 20.75l-137.83 7.92-12.92-.75-182.83 14.19-165.45 9.5-9.22-1.22-513 31-59.33-28.67 1.66-64.67-23.79 1.77-60.66 1.16-35.17-14.83-.17-10.5 2.34-.67-.5-49.16-4.67-1.67v-2.83h101.17l.5-76.67 24.4 13.38 58 5.77 510.06-5.55 11.11-1.11 344.41-4.42 12.89-.22 139.34-2.22 296.88-4.28 16.56-.11 317.36-4.06 13.17-.41 98.75-.92 112.79.25z"
+                        class="st0" />
+                    <path id="Floor_x5F_01" data-link="Lobby_Top.html" data-name="Floor 01"
+                        d="m2875.25 1475.94-12.33.67-2.78 8.45-96.56 8.44v6.89l-96.55 10.55-27.56-3-97.94 11.45v6.33l-213.72 23.84-22.78-4.45-289.22 32.28.55 7.22-137.08 15.7-19.17-5.92-177.78 18.69v9.09l-163.5 18.33-15.33-7.22-211.33 22.66-.56 3.12-302 32.83-58.33-51.67.83-12.83 2-.83.83-67.34-3.33-1.33-.5-2.33 17.45-1.95-66.39-48.83-55.84 4.66-8.66-8 .16-9.33h2.34l-1.17-51.67 92.83-5.66.5-63 23.79-1.77-1.66 64.67 59.33 28.67 513-31 9.22 1.22 165.45-9.5 182.83-14.19 12.92.75 137.83-7.92s299-20.83 299.34-20.75c.33.08 14.75 1.08 14.75 1.08l210.33-13.33 109.33-8.22 12.45.66 82.89-5 17.11-.89 111.89-8.33z"
+                        class="st0" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SLIDE-IN ENQUIRY PANEL ══ -->
+    <div class="enquiry">
+        <div class="overlay" id="enquiryOverlay" aria-hidden="true">
+            <div class="modal" role="dialog" aria-labelledby="enquiryTitle">
+                <div class="modal-header">
+                    <div id="enquiryTitle" class="title">Request Callback</div>
+                    <button class="close" id="closeBtn" aria-label="Close">✕</button>
+                </div>
+                <div class="modal-body">
+                    <form id="enquiryForm" class="form" novalidate>
+
+                        <input class="input" name="fullName" placeholder="Full Name" required />
+
+                        <div class="phone">
+                            <select name="dialCode" aria-label="Country Code">
+                                <option>+91</option>
+                                <option>+971</option>
+                                <option>+44</option>
+                                <option>+1</option>
+                            </select>
+                            <input type="tel" name="phone" placeholder="Phone Number" maxlength="10" pattern="[0-9]{10}"
+                                inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required />
+                        </div>
+
+                        <input class="input" name="city" placeholder="City" required />
+
+                        <input class="input" type="email" name="email" placeholder="Email Address"
+                            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required />
+
+                        <select class="input select" name="preferredTime" required>
+                            <option value="" disabled selected>Preferred Time to Call</option>
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                        </select>
+
+                        <!-- Google reCAPTCHA — replace YOUR_SITE_KEY -->
+                        <div class="g-recaptcha" data-sitekey="6Le6qZQsAAAAALlNrziohJHHqf43BSZvE1wfoxnl"></div>
+
+                        <button class="submit" type="submit">Request a Call Back</button>
+
+                        <a href="tel:+919876543210" class="call-btn">
+                            📞 Call Now
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button class="enquiry-btn" id="openEnquiry">Request Call Back</button> -->
+
+
+
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const detailsBox = document.getElementById('details');
+
+            detailsBox.innerHTML = `
+        <div><span>1BHK</span><span>: 48</span></div>
+    `;
+        });
+    </script>
+
+
+
+
+
+
+
+    <script src="./../JS/dec7d4pmru.js"></script>
+    <script src="./../JS/Notification/xoqrfe8095.js"></script>
+    <script src="./../JS/BackButton.js"></script>
+
+    <script src="./../JS/s2dlrxbqxj.js"></script>
+    <script src="./../JS/5guwuzaijb.js"></script>
+    <script src="./../JS/ky0nwmerow.js"></script>
+
+
+
+
+
+    <!-- ════ JUMPBAR ════ -->
+    <nav id="jumpBar">
+        <div class="jb-divider"></div>
+        <a href="../index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Home
+        </a>
+        <div class="jb-divider"></div>
+        <a href="GodEye/LiveView.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="M9 16v-8h4a2.5 2.5 0 010 5H9" />
+            </svg>
+            Live
+        </a>
+        <div class="jb-divider"></div>
+        <a href="Tower_B.html" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M6 22V4a2 2 0 012-2h8a2 2 0 012 2v18z" />
+                <path d="M6 12H4a2 2 0 00-2 2v8h4" />
+                <path d="M18 12h2a2 2 0 012 2v8h-4" />
+                <path d="M10 7h4M10 12h4M10 17h4" />
+            </svg>
+            Back
+        </a>
+        <div class="jb-divider"></div>
+        <a href="GodEye/Parking_01.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="M9 16v-8h4a2.5 2.5 0 010 5H9" />
+            </svg>
+            Parking
+        </a>
+
+
+
+
+
+
+    </nav>
+
+    <!-- ════ ENQUIRY TRIGGER ════ -->
+    <button class="enquiry-btn" id="enquiryBtn" aria-label="Open Enquiry">Enquiry</button>
+
+    <!-- ════ FAB CLUSTER ════ -->
+    <div class="fab-cluster">
+        <a class="fab-item fab-whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener"
+            aria-label="WhatsApp">
+            <div class="fab-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.112 1.529 5.835L.057 23.386a.5.5 0 0 0 .606.63l5.753-1.51A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 0 1-5.003-1.371l-.359-.213-3.714.975.993-3.63-.234-.373A9.818 9.818 0 1 1 12 21.818z" />
+                </svg></div>
+            <span class="fab-label">WhatsApp</span>
+        </a>
+        <a class="fab-item fab-email" href="mailto:info@example.com" aria-label="Email Us">
+            <div class="fab-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg></div>
+            <span class="fab-label">Email Us</span>
+        </a>
+        <a class="fab-item fab-location" href="https://maps.app.goo.gl/ZgXm51Arpmt4dveE7" target="_blank" rel="noopener"
+            aria-label="Location">
+            <div class="fab-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg></div>
+            <span class="fab-label">Location</span>
+        </a>
+    </div>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('enquiryBtn');
+            var overlay = document.getElementById('enquiryOverlay');
+            var closeBtn = document.getElementById('closeBtn');
+            if (!btn || !overlay) return;
+            btn.addEventListener('click', function () {
+                overlay.classList.add('is-open');
+                overlay.setAttribute('aria-hidden', 'false');
+                btn.classList.add('is-hidden');
+            });
+            function closePanel() {
+                overlay.classList.remove('is-open');
+                overlay.setAttribute('aria-hidden', 'true');
+                btn.classList.remove('is-hidden');
+            }
+            if (closeBtn) closeBtn.addEventListener('click', closePanel);
+            overlay.addEventListener('click', function (e) { if (e.target === overlay) closePanel(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
+        })();
+    </script>
+</body>
