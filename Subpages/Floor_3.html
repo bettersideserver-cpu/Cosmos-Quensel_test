@@ -18,35 +18,18 @@
 
         .content-wrapper img {
             display: block;
-            height: 100vh;
-            width: auto;
+            height: auto;
+            width: 100%;
         }
 
         .Cutout {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
 
-        .Cutout svg {
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .Cutout path {
-            pointer-events: auto;
-        }
-
-        .Cutout {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(var(--scene-scale, 1));
             width: 90vmin;
-            aspect-ratio: 3840 / 5830;
+            /* aspect-ratio: 4096 / 4096; */
             width: 100vw;
             height: 100vh;
             overflow: hidden;
@@ -57,15 +40,19 @@
             z-index: 1;
         }
 
-
         .Cutout svg {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            /* 🔥 important */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
         }
 
         .Cutout path {
+            pointer-events: auto;
             fill: transparent;
             pointer-events: auto;
             cursor: pointer;
@@ -109,24 +96,67 @@
 
         .content-wrapper {
             position: relative;
-            display: inline-block;
-            /* Shrink-wrap to image */
+            width: 100vw;
+            height: 100vh;
         }
 
         .content-wrapper img {
             display: block;
+            width: 100vw;
             height: 100vh;
-            /* Image fills viewport height */
-            width: auto;
+            object-fit: cover;
+            object-position: center;
             user-select: none;
             pointer-events: none;
         }
 
         @media (max-width: 600px) {
+            .lobby-top {
+                overflow: hidden;
+                cursor: grab;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+
+            .lobby-top.dragging {
+                cursor: grabbing;
+            }
+
+            .content-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: auto;
+                height: 100vh;
+                will-change: transform;
+            }
+
             .content-wrapper img {
-                width: 100vw;
-                /* mobile: fit by width */
-                height: auto;
+                display: block;
+                width: auto;
+                height: 100vh;
+                max-width: none;
+                object-fit: fill;
+            }
+
+            .Cutout {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: none;
+            }
+
+            .Cutout svg {
+                top: 0;
+                left: 0;
+                transform: none;
+                /* 🔥 IMPORTANT */
+                width: 100%;
+                height: 100%;
+                min-width: unset;
+                min-height: unset;
             }
         }
 
@@ -148,6 +178,98 @@
             z-index: 10;
         }
 
+        /* FLOOR PILL BASE */
+        .floor-pill {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            /* FIXED */
+            z-index: 9999;
+
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 999px;
+            padding: 8px 12px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            font-family: sans-serif;
+        }
+
+        /* BUTTON */
+        .floor-pill__trigger {
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 999px;
+            transition: background 0.3s;
+        }
+
+        .floor-pill__trigger:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* DROPDOWN */
+        .floor-pill__list {
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            transform-origin: top;
+
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 12px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            /* ✅ CONTROL SIZE HERE */
+            width: 100px;
+            /* fixed width */
+            max-height: 220px;
+            /* limit height */
+            overflow-y: auto;
+            /* scroll if too many items */
+
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        /* OPEN STATE */
+        .floor-pill.open .floor-pill__list {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        /* ITEMS */
+        .floor-pill__item {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: background 0.25s;
+
+            text-align: center;
+            /* 👈 centers text */
+            display: block;
+            /* ensures full width clickable */
+        }
+
+        .floor-pill__item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ACTIVE */
+        .floor-pill__item.active {
+            background: rgba(201, 168, 124, 0.25);
+            color: #c9a87c;
+        }
 
         /* .button1 {
             top: 70%;
@@ -256,59 +378,34 @@
         <div class="content-wrapper">
             <!-- <img src="./../../images/Apparments/1BHK/Lobby_Top.jpg" alt="Penthouse Lobby Image" /> -->
             <img id="mainImage" src="./../images/Thumbnail/Apartments/1BHK/Lobby_Top.webp"
-                data-full="./../images/Apartments/1BHK/Lobby_Top.jpg" alt="Home" fetchpriority="high" decoding="async"
-                width="3840" height="5830" class="blur-up" />
+                data-full="./../images/floor/floor_3.jpg" alt="Home" fetchpriority="high" decoding="async" width="4096"
+                height="4096" class="blur-up" />
             <div class="Cutout">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 4096 4096">
-                    <path id="Room" id="Apparments" data-link="360/Bedroom.html"
-                        d="M3051 1134.9v315.5l-94.1-.1-72.2-.1v-315.4z" class="st0" />
-                    <path id="Room_11" data-link="2BHK/360/Kitchen.html" d="M314 2144.33h650.33V1250.5H941v-2.33H710.33v17.16H314z" class="st0" />
-                    <path id="Room_01" data-link="2BHK/360/Kitchen.html"
-                        d="M314 2144.33v815.5H209.61v362.23h503.11l14.67-12.45v-140h18.67v49.78H992.5v-897.56h-97.67v-177.5z"
+                <!-- <path id="Room_01" data-link="Subpages/1BHK/360/Kitchen.html"
+                        d="M325.83,992.22v815.5h-104.39v362.23h503.11l14.67-12.45v-140h18.67v49.78h246.44v-897.56h-97.67v-177.5H325.83Z" /> -->
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 4096 4096">
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html"
+                        d="M360 2847h428l-3-77 247-1v-760h-95v-69H471v609H360z" class="st0" />
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html" d="M471 1940v-804h317l.6-49.48H1034V1876h-95v64z"
                         class="st0" />
-                    <path id="Room_02" data-link="1BHK/360/Kitchen.html" d="M1700.06 2316.39v940h-370.78v6.78H984.94v-43.78l3.58-424.5h261.58v-475.04z"
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M1241 2007v395h-209v388h289v-15h306v-768z"
                         class="st0" />
-                    <path id="Room_03" data-link="1BHK/360/Kitchen.html" d="M1700.06 3256.39h568.22v-938.67l-568.22-1.33z" class="st0" />
-                    <path id="Room_04" data-link="1BHK/360/Kitchen.html"
-                        d="M2268.28 3206.94h23.94v21.34h212.89l3.33 3.33h70v31.56h261.12v-946.78l-571.28 1.33z"
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M1627 2007h482v781.28l-217 3.62V2775h-265z"
                         class="st0" />
-                    <path id="Room_05" data-link="2BHK/360/Kitchen.html" d="M2839.56 3263.17H3458v-42h415v-431.39l-61-26.61v-440h-972.44z" class="st0" />
-                    <path id="Room_06" data-link="2BHK/360/Kitchen.html" d="M3940 1286.17v384h-92v510h-802.89v-199.78h-38.33v-727.67h855.89v33.45z"
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M2109 2007h483v778h-215v-19h-268z"
                         class="st0" />
-                    <path id="Room_07" data-link="1BHK/360/Kitchen.html"
-                        d="M3045.11 1980.39v199.78h-562.89v-246.56h-31.78v-81.33h-9.55v-599.56h565.89v727.67z"
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html" d="M2592 2007h537v389h327v359h-864z"
                         class="st0" />
-                    <path id="Room_08" data-link="1BHK/360/Kitchen.html" d="M2482.22 1933.61v246.56h-351.55v-927.45h310.22v599.56h9.55v81.33z"
-                        class="st0" />
-                    <path id="Room_09" data-link="1BHK/360/Kitchen.html" d="M1563.67 1252.72h567v927.45h-567z" class="st0" />
-                    <path id="Room_10" data-link="1BHK/360/Kitchen.html" d="M964.33 1252.72h599.34v927.45H964.33z" class="st0" />
-                </svg> -->
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 4096 2304">
-                    <defs>
-                        <style>
-                            .st0 {
-                                fill: #fff
-                            }
-                        </style>
-                    </defs>
-                    <!-- <path id="Room_11" data-link="2BHK/360/Kitchen.html"
-                        d="M325.83 992.22h650.33V98.38h-23.33v-2.33H722.16v17.16H325.83v879Z" class="st0" /> -->
-                    <path id="Room_01" data-link="2BHK/360/Kitchen.html"
-                        d="M325.83,992.22v815.5h-104.39v362.23h503.11l14.67-12.45v-140h18.67v49.78h246.44v-897.56h-97.67v-177.5H325.83Z" />
-                    <path id="Room_02" data-link="1BHK/360/Kitchen.html"
-                        d="M1711.89,1164.27v940h-370.78v6.78h-344.34v-43.78l3.58-424.5h261.58v-475.04l449.96-3.46Z" />
-                    <path id="Room_03" data-link="1BHK/360/Kitchen.html" d="M1711.89,2104.27h568.22v-938.67l-568.22-1.33v940Z" />
-                    <path id="Room_04" data-link="1BHK/360/Kitchen.html" class="st0"
-                        d="M2280.11,2054.82h23.94v21.34h212.89l3.33,3.33h70v31.56h261.12v-946.78l-571.28,1.33v889.22Z" />
-                    <path id="Room_05" data-link="2BHK/360/Kitchen.html" class="st0"
-                        d="M3884.83,1637.66v431.39h-415v42h-618.44v-940h614.05v460.28h387.46l2.45-6.53,29.48,12.86Z" />
-                    <path id="Room_06" data-link="1BHK/360/Kitchen.html" class="st0" d="M3951.83,134.05v384h-92v510h-595.39V100.6h610.06v33.45h77.33Z" />
-                    <path id="Room_07" data-link="1BHK/360/Kitchen.html" class="st0" d="M3264.44,100.6v927.45h-570.11l6.52-927.45h563.58Z" />
-                    <path id="Room_08" data-link="1BHK/360/Kitchen.html" class="st0" d="M2694.33,1028.05h-551.83V100.6h558.39l-6.56,927.45Z" />
-                    <path id="Room_09" data-link="1BHK/360/Kitchen.html" class="st0" d="M1575.5,100.6h567v927.45h-567V100.6Z" />
-                    <path id="Room_10" data-link="1BHK/360/Kitchen.html" class="st0" d="M976.16,100.6h599.34v927.45h-599.34V100.6Z" />
-                    <path id="Room_11" data-link="2BHK/360/Kitchen.html" class="st0"
-                        d="M325.83,992.22h650.33V98.38h-23.33v-2.33h-230.67v17.16h-396.33v879h0Z" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M2957.76 1874.35h448.69v-412.49h81.93l34.29-18.1v-320.09h-564.91z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M2957.76 1874.35h-482.99v-743.06h262.93v-40.96h220.06z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M2474.77 1874.35h-481.08v-743.06h264.83l7.62-40.96h208.63z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M1993.69 1874.35h-480.13v-787.83h218.15v44.77h261.98z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M1513.56 1874.35 1034 1876v-743.76h263.31l3.81-45.72h212.44z" class="st0" />
                 </svg>
             </div>
         </div>
@@ -475,6 +572,113 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        // Mobile drag-to-pan (horizontal only)
+        (function () {
+            if (window.innerWidth > 600) return;
+            const lobby = document.querySelector('.lobby-top');
+            const wrapper = document.querySelector('.content-wrapper');
+            if (!lobby || !wrapper) return;
+
+            let isDragging = false;
+            let startX = 0;
+            let translateX = 0;
+
+            function getImgWidth() {
+                const img = wrapper.querySelector('img');
+                return img ? img.offsetWidth : window.innerWidth;
+            }
+
+            function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+
+            function applyTransform() {
+                const minX = -(getImgWidth() - window.innerWidth);
+                translateX = clamp(translateX, minX, 0);
+                wrapper.style.transform = `translateX(${translateX}px)`;
+            }
+
+            // Touch
+            lobby.addEventListener('touchstart', e => {
+                if (e.touches.length !== 1) return;
+                isDragging = true;
+                startX = e.touches[0].clientX - translateX;
+                lobby.classList.add('dragging');
+            }, { passive: true });
+
+            lobby.addEventListener('touchmove', e => {
+                if (!isDragging || e.touches.length !== 1) return;
+                translateX = e.touches[0].clientX - startX;
+                applyTransform();
+            }, { passive: true });
+
+            lobby.addEventListener('touchend', () => {
+                isDragging = false;
+                lobby.classList.remove('dragging');
+            });
+
+            // Mouse (desktop fallback)
+            lobby.addEventListener('mousedown', e => {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                lobby.classList.add('dragging');
+            });
+            window.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                applyTransform();
+            });
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+                lobby.classList.remove('dragging');
+            });
+
+            // Init: start centered
+            window.addEventListener('load', () => {
+                translateX = -((getImgWidth() - window.innerWidth) / 2);
+                applyTransform();
+            });
+        })();
+    </script>
+
+    <!-- Floor Pill Navigator -->
+    <div class="floor-pill" id="floorPill">
+        <div class="floor-pill__trigger" id="floorTrigger">Select Floors</div>
+        <div class="floor-pill__list" id="floorList">
+            <a class="floor-pill__item" href="Floor_5.html">Floor 5</a>
+            <a class="floor-pill__item" href="Floor_4.html">Floor 4</a>
+            <a class="floor-pill__item active" href="Floor_3.html">Floor 3</a>
+            <a class="floor-pill__item" href="Floor_2.html">Floor 2</a>
+            <a class="floor-pill__item" href="Floor_1.html">Floor 1</a>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const pill = document.getElementById('floorPill');
+            const trigger = document.getElementById('floorTrigger');
+            if (!pill || !trigger) return;
+
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                pill.classList.toggle('open');
+            });
+
+            // close on outside click
+            document.addEventListener('click', function (e) {
+                if (!pill.contains(e.target)) {
+                    pill.classList.remove('open');
+                }
+            });
+
+            // prevent floor item clicks closing before nav
+            document.querySelectorAll('.floor-pill__item').forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                });
+            });
+        })();
     </script>
 </body>
 
