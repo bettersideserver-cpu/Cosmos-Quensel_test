@@ -359,7 +359,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
-            background: rgba(20, 20, 20, 0.85);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 999px;
@@ -368,7 +368,7 @@
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 0.08em;
-            color: #c9a87c;
+            color: #000000;
             box-shadow: 0 8px 30px rgba(0,0,0,0.35);
             border: 1px solid rgba(201,168,124,0.3);
             white-space: nowrap;
@@ -695,25 +695,28 @@
     </script>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const detailsBox = document.getElementById('details');
-            detailsBox.innerHTML = ``;
-            const paths = document.querySelectorAll('.Cutout path');
-            let selectedPath = null;
-            let currentLink = '';
+      window.addEventListener('DOMContentLoaded', () => {
+    const detailsBox = document.getElementById('details');
+    detailsBox.innerHTML = ``;
+    const paths = document.querySelectorAll('.Cutout path');
 
-            paths.forEach(path => {
-                const link = path.getAttribute('data-link');
-                if (link) {
-                    path.addEventListener('click', () => {
-                        path.style.opacity = "0.6";
-                        setTimeout(() => {
-                            window.location.href = `${link}`;
-                        }, 800);
-                    });
-                }
+    // Get current floor number from the filename (Floor_1.html → "1")
+    const currentFile = window.location.pathname.split('/').pop();
+    const floorMatch = currentFile.match(/Floor_(\d+)/);
+    const currentFloor = floorMatch ? floorMatch[1] : '1';
+
+    paths.forEach(path => {
+        const link = path.getAttribute('data-link');
+        if (link) {
+            path.addEventListener('click', () => {
+                path.style.opacity = "0.6";
+                setTimeout(() => {
+                    window.location.href = `${link}?floor=${currentFloor}`;
+                }, 800);
             });
-        });
+        }
+    });
+});
     </script>
 
     <script>

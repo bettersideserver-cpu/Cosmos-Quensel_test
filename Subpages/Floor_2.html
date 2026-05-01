@@ -690,25 +690,28 @@
     </script>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const detailsBox = document.getElementById('details');
-            detailsBox.innerHTML = ``;
-            const paths = document.querySelectorAll('.Cutout path');
-            let selectedPath = null;
-            let currentLink = '';
+       window.addEventListener('DOMContentLoaded', () => {
+    const detailsBox = document.getElementById('details');
+    detailsBox.innerHTML = ``;
+    const paths = document.querySelectorAll('.Cutout path');
 
-            paths.forEach(path => {
-                const link = path.getAttribute('data-link');
-                if (link) {
-                    path.addEventListener('click', () => {
-                        path.style.opacity = "0.6";
-                        setTimeout(() => {
-                            window.location.href = `${link}`;
-                        }, 800);
-                    });
-                }
+    // Get current floor number from the filename (Floor_2.html → "2")
+    const currentFile = window.location.pathname.split('/').pop();
+    const floorMatch = currentFile.match(/Floor_(\d+)/);
+    const currentFloor = floorMatch ? floorMatch[1] : '1';
+
+    paths.forEach(path => {
+        const link = path.getAttribute('data-link');
+        if (link) {
+            path.addEventListener('click', () => {
+                path.style.opacity = "0.6";
+                setTimeout(() => {
+                    window.location.href = `${link}?floor=${currentFloor}`;
+                }, 800);
             });
-        });
+        }
+    });
+});
     </script>
 
     <script>
