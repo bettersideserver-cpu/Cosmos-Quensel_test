@@ -812,20 +812,20 @@
   </script>
 
   <script>
-    const LOW_SRC = "./../../../images/Thumbnail/Apartments/1BHK/360/Bedroom.webp";
-    const HIGH_SRC = "./../../../images/Apartments/1BHK/360/Bedroom.jpg";
+    const LOW_SRC = "./../../../images/Thumbnail/Apartments/1BHK/360/Bedroom-2.webp";
+    const HIGH_SRC = "./../../../images/Apartments/1BHK/360/Bedroom-2.jpg";
     const imageContainer = document.querySelector(".image-container");
     const panoLow = new PANOLENS.ImagePanorama(LOW_SRC);
     const panoHigh = new PANOLENS.ImagePanorama(HIGH_SRC);
 
     const viewer = new PANOLENS.Viewer({ container: imageContainer, autoRotate: false, autoRotateSpeed: 0.1, controlBar: false, cameraFov: 80 });
     let didInitView = false;
-    const TEXTURE_YAW = Math.PI / 2 + 100;
+    const TEXTURE_YAW = Math.PI / 2 + 110;
     panoLow.rotation.y = TEXTURE_YAW; panoHigh.rotation.y = TEXTURE_YAW;
 
     function setInitialViewAndLockPitch() {
       if (didInitView) return; didInitView = true;
-      const controls = viewer.getControl(); controls.rotateUp(-(-Math.PI / 10));
+      const controls = viewer.getControl(); controls.rotateUp(-(Math.PI / 90));
       if ('minPolarAngle' in controls && 'maxPolarAngle' in controls) { controls.minPolarAngle = 0; controls.maxPolarAngle = Math.PI; }
       if ('enablePan' in controls) controls.enablePan = false;
     }
@@ -843,18 +843,10 @@
     const ARROW_ICON = createArrowSVG();
 
     const spot1 = new PANOLENS.Infospot(500, ARROW_ICON);
-    setFromAngles(spot1, 179, -10); spot1.addHoverText("Bathroom");
-    spot1.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bathroom.html"; }, 800); });
+    setFromAngles(spot1, 73, -10); spot1.addHoverText("Bedroom Entry");
+    spot1.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bedroom.html"; }, 800); });
 
-    const spot2 = new PANOLENS.Infospot(500, ARROW_ICON);
-    setFromAngles(spot2, 20, -10); spot2.addHoverText("Lobby");
-    spot2.addEventListener('click', () => { setTimeout(() => { window.location.href = "Lobby.html"; }, 800); });
-
-    const spot3 = new PANOLENS.Infospot(500, ARROW_ICON);
-    setFromAngles(spot3, -90, -10); spot3.addHoverText("Bedroom");
-    spot3.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bedroom-1.html"; }, 800); });
-
-    [panoLow, panoHigh].forEach(pano => { pano.add(spot1); pano.add(spot2); pano.add(spot3); });
+    [panoLow, panoHigh].forEach(pano => { pano.add(spot1); });
 
     panoLow.addEventListener("load", () => {
       panoHigh.addEventListener("load", () => { viewer.setPanorama(panoHigh, 600); });
