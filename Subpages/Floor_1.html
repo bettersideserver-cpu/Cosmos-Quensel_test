@@ -373,7 +373,7 @@
         </svg>
     </button>
     <div id="waLabel" class="wa-label">Chat on WhatsApp</div> -->
-  <button class="close-btn2" onclick="window.location.href='/'">←</button>
+    <button class="close-btn2" id="closeCard">←</button>
     <div class="lobby-top">
         <div class="content-wrapper">
             <!-- <img src="./../../images/Apparments/1BHK/Lobby_Top.jpg" alt="Penthouse Lobby Image" /> -->
@@ -386,11 +386,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 4096 4096">
                     <!-- <path id="2 BHK" data-link="2BHK/360/Kitchen.html"
                         d="M360 2847h428l-3-77 247-1v-760h-95v-69H471v609H360z" class="st0" /> -->
-                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html" d="M493.19 1146.9v797.22H960.3v-66.33h87.45v-762.67l-8.23-19.11H796.86v47.56z"
-                    class="st0"/>
-                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M1047.75 1877.79h475.22v-794.33H1306.3v60.66h-258.55z" class="st0" />
-                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M1522.97 1877.79h472.89V1146.9h-256v-29.33l-19.34-34.11h-197.55z"
-                        class="st0" />
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html"
+                        d="M493.19 1146.9v797.22H960.3v-66.33h87.45v-762.67l-8.23-19.11H796.86v47.56z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M1047.75 1877.79h475.22v-794.33H1306.3v60.66h-258.55z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M1522.97 1877.79h472.89V1146.9h-256v-29.33l-19.34-34.11h-197.55z" class="st0" />
                     <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
                         d="M1995.86 1877.79h293.22v-66.33h179v-666.34l12.89-23.33v-35.56h-215.33l-6.23 32.23v28.33l-263.55.11z"
                         class="st0" />
@@ -400,11 +401,14 @@
                     <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
                         d="M2941.19 1877.79h441.11v-414.78h102.59l39.58-18.67v-322.5h-318l-23.33 23H2947.1l-5.91 9.28z"
                         class="st0" />
-                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html" d="M493.19 1944.12v793.22h311.78v37.78l20.55-8.44h224.5v-756.89h-94.77v-65.67z"
-                        class="st0" />
-                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M1635.25 2006.57v763.66h262.33v-26h212v-737.66z" class="st0" />
-                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html" d="M2109.58 2006.57h474.67v724.33h-266v39.33h-208.67z" class="st0" />
-                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html" d="M2584.25 2730.9h852.55v-344.44h-331.44v-379.89h-521.11z" class="st0" />
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html"
+                        d="M493.19 1944.12v793.22h311.78v37.78l20.55-8.44h224.5v-756.89h-94.77v-65.67z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M1635.25 2006.57v763.66h262.33v-26h212v-737.66z" class="st0" />
+                    <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
+                        d="M2109.58 2006.57h474.67v724.33h-266v39.33h-208.67z" class="st0" />
+                    <path id="2 BHK" data-link="2BHK/360/Kitchen.html"
+                        d="M2584.25 2730.9h852.55v-344.44h-331.44v-379.89h-521.11z" class="st0" />
                 </svg>
             </div>
         </div>
@@ -470,7 +474,7 @@
         });
     </script>
 
-    <script src="/JS/BackButton.js"></script>
+    <script src="../JS/BackButton.js"></script>
 
 
     <script src="./../JS/dec7d4pmru.js"></script>
@@ -549,8 +553,8 @@
             dockItems.addEventListener('mousemove', magnify); dockItems.addEventListener('mouseleave', resetAll);
             items.forEach(c => { c.addEventListener('click', e => { c.classList.add('is-bouncing'); c.addEventListener('animationend', () => c.classList.remove('is-bouncing'), { once: true }); const r = document.createElement('span'); r.className = 'dock-ripple'; const icon = c.querySelector('.dock-icon'), b = icon.getBoundingClientRect(), s = Math.max(b.width, b.height); r.style.width = r.style.height = s + 'px'; r.style.left = (e.clientX - b.left - s / 2) + 'px'; r.style.top = (e.clientY - b.top - s / 2) + 'px'; icon.appendChild(r); r.addEventListener('animationend', () => r.remove()); }); });
         })();
-        
-     
+
+
     </script>
 
     <script>
@@ -681,6 +685,7 @@
             });
         })();
     </script>
+
 </body>
 
 </html>
