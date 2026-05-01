@@ -811,7 +811,7 @@
 
     const viewer = new PANOLENS.Viewer({ container: imageContainer, autoRotate: false, autoRotateSpeed: 0.1, controlBar: false, cameraFov: 80 });
     let didInitView = false;
-    const TEXTURE_YAW = -Math.PI / 2 + 0;
+    const TEXTURE_YAW = Math.PI / 2 + 33;
     panoLow.rotation.y = TEXTURE_YAW; panoHigh.rotation.y = TEXTURE_YAW;
 
     function setInitialViewAndLockPitch() {

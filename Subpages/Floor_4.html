@@ -178,7 +178,7 @@
             z-index: 10;
         }
 
-        /* FLOOR PILL BASE */
+    /* FLOOR PILL BASE */
         .floor-pill {
             position: fixed;
             top: 20px;
@@ -186,7 +186,7 @@
             /* FIXED */
             z-index: 9999;
 
-            background: rgba(20, 20, 20, 0.75);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(12px);
             border-radius: 999px;
             padding: 8px 12px;
@@ -197,7 +197,7 @@
 
         /* BUTTON */
         .floor-pill__trigger {
-            color: #fff;
+            color: #000000;
             font-size: 14px;
             cursor: pointer;
             padding: 8px 14px;
@@ -217,7 +217,7 @@
             transform: translateX(-50%) scale(0.9);
             transform-origin: top;
 
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 12px;
@@ -248,7 +248,7 @@
 
         /* ITEMS */
         .floor-pill__item {
-            color: #fff;
+            color: #000000;
             text-decoration: none;
             padding: 8px 14px;
             border-radius: 10px;
@@ -270,7 +270,6 @@
             background: rgba(201, 168, 124, 0.25);
             color: #c9a87c;
         }
-
         /* .button1 {
             top: 70%;
             left: 64%;
@@ -351,13 +350,35 @@
             transform: scale(1);
             opacity: 1;
         }
+        .floor-badge {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px;
+    padding: 10px 28px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #000000;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    border: 1px solid rgba(201,168,124,0.3);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
     </style>
 </head>
 
 <body>
+<div class="floor-badge">Floor 4</div>
 
-    <div id="floorTip" class="floortip"></div>
-
+    
 
 
     <!-- Button (use JS click handler so message is built fresh on click)
@@ -406,6 +427,93 @@
                         d="M1993.69 1874.35h-480.13v-787.83h218.15v44.77h261.98z" class="st0" />
                     <path id="1 BHK" data-link="1BHK/360/Kitchen.html"
                         d="M1513.56 1874.35 1034 1876v-743.76h263.31l3.81-45.72h212.44z" class="st0" />
+                    <!-- BHK Labels — white pill, black text, centered in row, pointer-events:none -->
+                    <defs>
+                        <filter id="pillShadow" x="-20%" y="-50%" width="140%" height="220%">
+                            <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.55)"/>
+                        </filter>
+                    </defs>
+                    <style>
+                        .bhk-pill-text {
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            font-size: 30px;
+                            font-weight: 700;
+                            letter-spacing: 4px;
+                            pointer-events: none;
+                            text-transform: uppercase;
+                        }
+                    </style>
+
+                    <!-- ═══ ROW 1 (y~1085-1940) — centered at y=1512 ═══ -->
+
+                    <!-- 2 BHK · x=752 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="647" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="752" y="1522" text-anchor="middle" fill="#000000">2 BHK</text>
+
+                    <!-- 1 BHK · x=1273 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="1168" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="1273" y="1522" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=1753 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="1648" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="1753" y="1522" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=2234 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="2129" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="2234" y="1522" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=2716 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="2611" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="2716" y="1522" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=3240 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="3135" y="1484" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="3240" y="1522" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- ═══ ROW 2 (y~2007-2847) — centered at y=2427 ═══ -->
+
+                    <!-- 2 BHK · x=574 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="469" y="2399" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="574" y="2437" text-anchor="middle" fill="#000000">2 BHK</text>
+
+                    <!-- 1 BHK · x=1330 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="1225" y="2399" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="1330" y="2437" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=1868 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="1763" y="2399" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="1868" y="2437" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 1 BHK · x=2350 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="2245" y="2399" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="2350" y="2437" text-anchor="middle" fill="#000000">1 BHK</text>
+
+                    <!-- 2 BHK · x=3024 -->
+                    <g filter="url(#pillShadow)" pointer-events="none">
+                        <rect x="2919" y="2399" width="210" height="56" rx="28" fill="#ffffff"/>
+                    </g>
+                    <text class="bhk-pill-text" x="3024" y="2437" text-anchor="middle" fill="#000000">2 BHK</text>
+
                 </svg>
             </div>
         </div>
