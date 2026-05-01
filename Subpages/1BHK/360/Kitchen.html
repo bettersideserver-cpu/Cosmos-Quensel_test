@@ -847,7 +847,7 @@
 
     // Hotspot 4 — Bathroom
     const spot4 = new PANOLENS.Infospot(550, ARROW_ICON);
-    setFromAngles(spot4, -57, -10); spot4.addHoverText("Bathroom");
+    setFromAngles(spot4, -53, -10); spot4.addHoverText("Bathroom");
     spot4.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bathroom.html"; }, 800); });
 
     [panoLow, panoHigh].forEach(pano => { pano.add(spot1); pano.add(spot3); pano.add(spot4); });

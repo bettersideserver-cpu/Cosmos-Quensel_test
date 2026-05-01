@@ -637,7 +637,11 @@
     setFromAngles(spot2, 250, -10); spot2.addHoverText("Bathroom");
     spot2.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bathroom.html"; }, 800); });
 
-    [panoLow, panoHigh].forEach(pano => { pano.add(spot1); pano.add(spot2); });
+    const spot3 = new PANOLENS.Infospot(500, ARROW_ICON);
+    setFromAngles(spot3, 90, -10); spot3 .addHoverText("Bedroom 2");
+    spot3.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bedroom_02-2.html"; }, 800); });
+
+    [panoLow, panoHigh].forEach(pano => { pano.add(spot1); pano.add(spot2); pano.add(spot3); });
 
     panoLow.addEventListener("load", () => {
       panoHigh.addEventListener("load", () => { viewer.setPanorama(panoHigh, 600); });
