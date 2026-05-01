@@ -471,7 +471,39 @@
         });
     </script>
 
-    <script src="../JS/BackButton.js"></script>
+      <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const widget = document.getElementById("ciWidget");
+      const toggle = document.getElementById("ciToggle");
+      const ciClose = document.getElementById("ciClose");
+
+      if (ciClose) {
+        ciClose.addEventListener("click", (e) => {
+          e.stopPropagation();
+          widget.classList.add("collapsed");
+          toggle.classList.add("visible");
+        });
+      }
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          widget.classList.remove("collapsed");
+          toggle.classList.remove("visible");
+        });
+      }
+
+      const closeCard = document.getElementById("closeCard");
+      if (closeCard) {
+        closeCard.addEventListener("click", () => {
+          window.location.href = "../index.html";
+        });
+      }
+
+      // Block pointer events from reaching Panolens canvas
+      ['mousedown', 'mouseup', 'click', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(evt => {
+        widget.addEventListener(evt, e => e.stopPropagation());
+      });
+    });
+  </script>
 
 
     <script src="./../JS/dec7d4pmru.js"></script>
