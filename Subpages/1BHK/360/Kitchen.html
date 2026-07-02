@@ -835,19 +835,19 @@
 
     // Hotspot 1 — Lobby
     const spot1 = new PANOLENS.Infospot(550, ARROW_ICON);
-    setFromAngles(spot1, 95, -10); spot1.addHoverText("Garden 1");
+    setFromAngles(spot1, 110, -10); spot1.addHoverText("Lobby");
     spot1.addEventListener('click', () => { setTimeout(() => { window.location.href = "Lobby.html"; }, 800); });
 
 
 
     // Hotspot 3 — Bedroom
     const spot3 = new PANOLENS.Infospot(550, ARROW_ICON);
-    setFromAngles(spot3, 30, -10); spot3.addHoverText("Bedroom");
+    setFromAngles(spot3, 45, -10); spot3.addHoverText("Bedroom");
     spot3.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bedroom.html"; }, 800); });
 
     // Hotspot 4 — Bathroom
     const spot4 = new PANOLENS.Infospot(550, ARROW_ICON);
-    setFromAngles(spot4, -53, -10); spot4.addHoverText("Bathroom");
+    setFromAngles(spot4, -20, -6); spot4.addHoverText("Bathroom");
     spot4.addEventListener('click', () => { setTimeout(() => { window.location.href = "Bathroom.html"; }, 800); });
 
     [panoLow, panoHigh].forEach(pano => { pano.add(spot1); pano.add(spot3); pano.add(spot4); });
