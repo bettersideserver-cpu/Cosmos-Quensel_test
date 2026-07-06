@@ -373,6 +373,37 @@
             white-space: nowrap;
             pointer-events: none;
         }
+
+
+
+
+
+
+        .availability-btn{
+    position: fixed;
+    top: 21px;
+    right: 180px;   /* adjust according to your Floor button */
+    z-index: 10000;
+
+    padding: 17px 15px;
+    border: none;
+    border-radius: 999px;
+font-family: sans-serif;
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(17px);
+
+    color: #222;
+    font-weight: 500;
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    transition: .25s;
+}
+
+.availability-btn:hover{
+    background:#fff;
+}
+
     </style>
 </head>
 
@@ -380,6 +411,9 @@
     <div class="floor-badge">Floor 1</div>
 
 
+<button id="toggleAvailability" class="availability-btn">
+    Hide Availability
+</button>
 
 
 
@@ -413,15 +447,15 @@
                         d="M475.69 1136.57v805.66h473v-68h91.33v-776.22H799.14v37.33z" class="st0" /> -->
 
 
-                    <path id="1 BHK" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER"
+                    <path id="1 BHK" data-unit="101" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER"
                         d="M502 1875.17h465.67v127.5h98.66v764H828.22l-15.11 9.77H787v-25.86H579.33v-14.02h-78.11z"
                         class="st0" />
-                    <path id="1 BHK" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER" d="M1632.89 2000.44h474.89v750.23h-204.45l-1.16 27.16h-59.5V2635h-209.78z"
+                    <path id="1 BHK" data-unit="104" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER" d="M1632.89 2000.44h474.89v750.23h-204.45l-1.16 27.16h-59.5V2635h-209.78z"
                         class="st0" />
-                    <path id="1 BHK" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER"
+                    <path id="1 BHK" data-unit="103" data-link="1BHK/Lobby_Top.html" data-balcony="CENTER"
                         d="M2107.78 2000.44h467.78v750.73h-201v-15.67h-60.06v38.33h-183.33v-42.66h-23.39z"
                         class="st0" />
-                    <path id="2 BHK" data-link="2BHK/Lobby_Top.html" data-balcony="LeftCorner" d="M2575.56 2000.44h521.33v392.89h205.33v244h-250.66v97.78h-476z"
+                    <path id="2 BHK" data-unit="102" data-link="2BHK/Lobby_Top.html" data-balcony="LeftCorner" d="M2575.56 2000.44h521.33v392.89h205.33v244h-250.66v97.78h-476z"
                         class="st0" />
 
                     <style>
@@ -830,6 +864,90 @@
             });
         })();
     </script>
+
+
+
+
+<script>
+
+
+       // =========================
+       // PASTE YOUR GOOGLE SCRIPT URL HERE
+       // =========================
+
+
+       
+const sheetURL = "https://script.google.com/macros/s/AKfycbzfU-wly0YFeHhAUJtXRevRisOhlAiAHVoj-5HOJlMM6OreJa-LHIyzd9rVTK33QEiNww/exec";
+
+let availabilityVisible = true;
+const unitColors = {};
+
+fetch(sheetURL)
+.then(response => response.json())
+.then(data => {
+
+    data.forEach(unit => {
+
+        const svg = document.querySelector(`[data-unit="${unit.unit}"]`);
+        if (!svg) return;
+
+        let color = "transparent";
+
+        switch(unit.status.toLowerCase().trim()){
+
+            case "sold":
+                color = "rgba(255,0,0,.45)";
+                break;
+
+            case "available":
+                color = "rgba(0,204,68,.45)";
+                break;
+
+            case "hold":
+                color = "rgba(255,153,0,.45)";
+                break;
+
+            case "booked":
+                color = "rgba(0,102,255,.45)";
+                break;
+        }
+
+        unitColors[unit.unit] = color;
+        svg.style.fill = color;
+    });
+
+});
+
+
+
+
+   </script>
+
+   <script>
+    document.getElementById("toggleAvailability").addEventListener("click", function(){
+
+    availabilityVisible = !availabilityVisible;
+
+    document.querySelectorAll("[data-unit]").forEach(svg => {
+
+        if(availabilityVisible){
+            svg.style.fill = unitColors[svg.dataset.unit] || "transparent";
+        }else{
+            svg.style.fill = "transparent";
+        }
+
+    });
+
+    this.textContent = availabilityVisible
+        ? "Hide Availability"
+        : "Show Availability";
+
+});
+
+
+   </script>
+
+
 </body>
 
 </html>
